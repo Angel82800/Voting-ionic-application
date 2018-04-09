@@ -7,12 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-  <button ion-button color="secondary" (click)="onClickStart()">Start</button>
+  <div style="display:flex;align-items:center">
+      <button ion-button color="secondary" (click)="onClickStart()">Start</button>
+      <!-- <button ion-button color="secondary" (click)="onClickStart()">Show/Hide</button> -->
+      <ion-checkbox [(ngModel)] = "show" style="margin-left : 2vw" (ionChange) = "setFlag()"></ion-checkbox>
+  </div>
+  
 
   <ion-list *ngIf = "star">
     <ion-item *ngFor="let x of result;let i=index">
       
-      <h2> Participant #{{ i+1 }} : {{ x }}</h2>
+      <h2 style="display: flex;"> Participant #{{ i+1 }}<div *ngIf = "show"> : {{ x }}</div></h2>
     </ion-item>
   </ion-list>
   <h1 *ngIf = "star">Participant #{{ index+1 }} : wins!</h1>
