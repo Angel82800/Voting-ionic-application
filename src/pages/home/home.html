@@ -7,12 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-  <div style="display:flex;align-items:center">
+  <div style="display:flex;align-items:center;justify-content: center">
       <button ion-button color="secondary" (click)="onClickStart()">Start</button>
       <!-- <button ion-button color="secondary" (click)="onClickStart()">Show/Hide</button> -->
       <ion-checkbox [(ngModel)] = "show" style="margin-left : 2vw" (ionChange) = "setFlag()"></ion-checkbox>
+      <button ion-button color="danger" style="margin-left : 2vw" (click)="onClickStop()">Stop</button>
   </div>
-  
+  <ion-label style="display: flex;align-items: center;justify-content: center;" *ngIf="startFlag != null">{{startFlag?'Running...':'Stopping...'}}</ion-label>
 
   <ion-list *ngIf = "star">
     <ion-item *ngFor="let x of result;let i=index">
