@@ -57,6 +57,50 @@ export class HomePage {
 
   ReadSMSList()
   {
+    if(this.startFlag){
+    this.platform.ready().then((readySource) => {
+      this.result = [0,0,0,0,0];
+      let filter = {
+        box : 'inbox', // 'inbox' (default), 'sent', 'draft'
+        indexFrom : 0, // start from index 0
+        maxCount : 50, // count of SMS to return each time
+      };
+      var addressArr = [];
+      if(SMS) SMS.listSMS(filter, (ListSms)=>{               
+        this.messages=ListSms;
+        
+        this.messages.forEach(element => {
+          if(addressArr.indexOf(element.address) == -1){
+            addressArr.push(element.address);
+            switch(element.body){
+              case "1":
+                this.result[0]+=1;
+                break;
+              case "2":
+                this.result[1]+=1;
+                break;
+              case "3":
+                this.result[2]+=1;
+                break;
+              case "4":
+                this.result[3]+=1;
+                break;
+              case "5":
+                this.result[4]+=1;
+                break;
+            }
+          }          
+        });
+        var val = Math.max.apply(Math,this.result);
+        this.index = this.result.indexOf(val);
+      },
+          
+      Error=>{
+        alert(JSON.stringify(Error));
+      });
+            
+    });
+  }
     setInterval(function(){
       if(this.startFlag){
         this.platform.ready().then((readySource) => {
