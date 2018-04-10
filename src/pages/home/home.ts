@@ -147,7 +147,7 @@ export class HomePage {
         });
       }
       
-    },30000);
+    },1500);
     
   }
 
